@@ -34,8 +34,8 @@ public class Produto {
     public String toString() {
         return """
                 Produto: %s
-                Preco: %s
-                Quantidade:%.2f 
+                Preco: %.2f
+                Quantidade:%d 
                 """.formatted(this.nome, this.preco, this.quantidade);
     }
 }
