@@ -1,7 +1,9 @@
 package br.com.alura.praticando.java.view;
 
 import br.com.alura.praticando.java.model.Livros;
+import br.com.alura.praticando.java.model.Monitoramento;
 import br.com.alura.praticando.java.model.Produto;
+import br.com.alura.praticando.java.model.Saldo;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -16,7 +18,7 @@ public class Main {
         System.out.println("Menu: " +
                 "1) Relatório produtos" +
                 "2) Imprimindo resumo do livro" +
-                "3)" +
+                "3) Zerando o saldo" +
                 "4)" +
                 "5)" +
                 "6)" +
@@ -53,25 +55,53 @@ public class Main {
                 }
                 break;
             case 2:
-                    int inserirMaislivros = 0;
+                int inserirMaislivros = 0;
+                ArrayList<Livros> livro = new ArrayList<>();
+
                     while(inserirMaislivros != 1 ){
+                        Livros livro1 = new Livros();
                         System.out.println("Insira o titulo: ");
                         String livroTitulo = sc.nextLine();
                         System.out.println("Insira o autor: ");
                         String livroAutor = sc.nextLine();
                         System.out.println("Insira a quantidade de paginas: ");
                         int livroPaginas = sc.nextInt();
-                        Livros livro = new Livros();
-                        livro.setAutor(livroAutor);
-                        livro.setPaginas(livroPaginas);
-                        livro.setTitulo(livroTitulo);
-                        livro.adicionarLivros(livro);
+                        livro1.setTitulo(livroTitulo);
+                        livro1.setAutor(livroAutor);
+                        livro1.setPaginas(livroPaginas);
+                        livro.add(livro1);
                         System.out.println("Digite 0 para incluir mais livros ou 1 para sair: ");
                         inserirMaislivros = sc.nextInt();
                         sc.nextLine();
                     }
+                for(Livros item : livro){
+                    System.out.println(item.getTitulo() + " de " + item.getAutor() + " com " + item.getPaginas() + " paginas" );
+                }
+                break;
+            case 3:
+                System.out.println("Digite um valor para colocar de saldo: ");
+                double saldoInput = sc.nextDouble();
+                Saldo saldo = new Saldo();
+                saldo.setSaldo(saldoInput);
+                System.out.printf("Saldo atual: %.3f\n " , saldo.getSaldo());
+                saldo.zerarSaldo();
+                System.out.println("Saldo atual: " + saldo.getSaldo());
+                break;
+            case 4:
+                ArrayList<Monitoramento> monitora = new ArrayList<>();
+                System.out.println("Monitorar Estufas Inteligentes");
+                String[] locais = {"plantação A","Plantação B","Plantação C","Plantação D","Plantação E"};
+                double [] temperaturas = {38.7, 36.5, 37.7, 37.1, 39.9};
+                for (int i = 0; i < locais.length; i++) {
+                    Monitoramento m = new Monitoramento();
+                    m.setLocal(locais[i]);
+                    m.setTemperatura(temperaturas[i]);
+                    monitora.add(m);
+                }
 
-
+                for(Monitoramento item : monitora){
+                    System.out.println(item.getLocal() + item.getTemperatura());
+                }
 
                 break;
         }
